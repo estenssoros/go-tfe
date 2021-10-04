@@ -18,7 +18,17 @@ jobs:
       - name: Setup Go Environment #https://github.com/marketplace/actions/setup-go-environment
         uses: actions/setup-go@v2
         with:
-          go-version: '1.17.1' # The Go version to download (if necessary) and use.
+          go-version: '1.17.1' # The Go version to download (if necessary) and use
+      - name: Install mockgen
+        run: |
+          MOCKGEN_VERSION=1.6.0
+          MOCKGEN_ZIP=mock_$MOCKGEN_VERSION_linux_amd64.tar.gz
+          curl -OL https://github.com/golang/mock/releases/download/v1.6.0/$MOCKGEN_ZIP
+          sudo tar xvzf -o $MOCKGEN_ZIP -d /usr/local mockgen
+          sudo chmod +x /usr/local/mockgen
+          rm -f $MOCKGEN_ZIP
+          ls /usr/local/
+          echo $GITHUB_PATH
       - name: Get dependencies
         run: go mod download
       - name: Generate mocks
