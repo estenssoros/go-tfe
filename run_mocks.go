@@ -105,6 +105,21 @@ func (mr *MockRunsMockRecorder) ForceCancel(ctx, runID, options interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ForceCancel", reflect.TypeOf((*MockRuns)(nil).ForceCancel), ctx, runID, options)
 }
 
+// List mocks base method.
+func (m *MockRuns) List(ctx context.Context, workspaceID string, options RunListOptions) (*RunList, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "List", ctx, workspaceID, options)
+	ret0, _ := ret[0].(*RunList)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// List indicates an expected call of List.
+func (mr *MockRunsMockRecorder) List(ctx, workspaceID, options interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockRuns)(nil).List), ctx, workspaceID, options)
+}
+
 // Read mocks base method.
 func (m *MockRuns) Read(ctx context.Context, runID string) (*Run, error) {
 	m.ctrl.T.Helper()
