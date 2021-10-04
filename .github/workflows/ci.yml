@@ -10,19 +10,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Restore go build cache #This action allows caching dependencies 
-        #and build outputs to improve workflow execution time https://github.com/marketplace/actions/cache
-        - uses: actions/cache@v2
-          with:
-            path: ~/.cache/go-build
-            key: ${{ runner.os }}-go-${{ hashFiles('**/go.mod') }}
+      - name: Restore go build cache #This action allows caching dependencies and build outputs to improve workflow execution time 
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.mod') }}
       - name: Setup Go Environment #https://github.com/marketplace/actions/setup-go-environment
-        - uses: actions/setup-go@v2
-          with:
-            go-version: '1.17.1' # The Go version to download (if necessary) and use.
-        - run: go version
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17.1' # The Go version to download (if necessary) and use.
+        run: go version
       - name: Get dependencies
-          run: go mod download
+        run: go mod download
       - name: Generate mocks
         run:  ./generate_mocks.sh
       - name: Ensure nothing changed
