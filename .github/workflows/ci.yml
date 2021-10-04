@@ -24,7 +24,7 @@ jobs:
           MOCKGEN_VERSION=1.6.0
           MOCKGEN_ZIP=mock_$MOCKGEN_VERSION_linux_amd64.tar.gz
           curl -OL https://github.com/golang/mock/releases/download/v1.6.0/$MOCKGEN_ZIP
-          gunzip MOCKGEN_ZIP -C /usr/local
+          sudo tar xvzf $MOCKGEN_ZIP --strip-components 1 -C /usr/local
           sudo chmod +x /usr/local/mockgen
           rm -f $MOCKGEN_ZIP
           ls /usr/local/
