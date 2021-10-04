@@ -21,23 +21,16 @@ jobs:
           go-version: '1.17.1' # The Go version to download (if necessary) and use
       - name: Install mockgen
         run: |
-          echo path:
-          echo $GITHUB_PATH
           MOCKGEN_ZIP=mock_1.6.0_linux_amd64.tar.gz
           curl -OL https://github.com/golang/mock/releases/download/v1.6.0/$MOCKGEN_ZIP
           sudo tar xvzf $MOCKGEN_ZIP --strip-components 1 -C /usr/local
           sudo chmod +x /usr/local/mockgen
           rm -f $MOCKGEN_ZIP
           echo /usr/local/ >> $GITHUB_PATH
-          echo path:
-          echo $GITHUB_PATH
       - name: Get dependencies
         run: go mod download
       - name: Generate mocks
-        run:  |
-          echo path:
-          echo $GITHUB_PATH
-          ./generate_mocks.sh
+        run:  ./generate_mocks.sh
       - name: Ensure nothing changed
         run: git diff --exit-code
 
